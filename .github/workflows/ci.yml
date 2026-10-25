@@ -38,13 +38,13 @@ jobs:
         run: php-security-audit --version
 
       - name: Run scanner on examples
-        run: php-security-audit scan ./examples/vulnerable --format json --output /tmp/scan.json
+        run: php-security-audit scan ./examples/vulnerable --format json --output /tmp/scan.json || true
 
       - name: Validate JSON output
-        run: python -c "import json; json.load(open('/tmp/scan.json')); print('Valid JSON')"
+        run: python -c "import json; d = json.load(open('/tmp/scan.json')); assert len(d['findings']) > 0; print('Valid JSON with', len(d['findings']), 'findings')"
 
       - name: Generate SARIF
-        run: php-security-audit scan ./examples/vulnerable --format sarif --output /tmp/scan.sarif
+        run: php-security-audit scan ./examples/vulnerable --format sarif --output /tmp/scan.sarif || true
 
       - name: Validate SARIF output
-        run: python -c "import json; json.load(open('/tmp/scan.sarif')); print('Valid SARIF')"
+        run: python -c "import json; d = json.load(open('/tmp/scan.sarif')); assert len(d['runs'][0]['results']) > 0; print('Valid SARIF with', len(d['runs'][0]['results']), 'results')"
