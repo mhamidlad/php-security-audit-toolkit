@@ -1,5 +1,11 @@
 # PHP Security Audit Toolkit
 
+[![CI](https://github.com/mhamidlad/php-security-audit-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/mhamidlad/php-security-audit-toolkit/actions/workflows/ci.yml)
+[![Security](https://github.com/mhamidlad/php-security-audit-toolkit/actions/workflows/security.yml/badge.svg)](https://github.com/mhamidlad/php-security-audit-toolkit/actions/workflows/security.yml)
+[![Python 3.11 | 3.12 | 3.13](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
+
 **Find PHP security risks. Understand the findings. Fix them. Verify the results.**
 
 A developer-focused security auditing toolkit for PHP applications. It inspects

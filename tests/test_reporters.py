@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 import json
-import os
-import tempfile
 
 from php_audit.models import (
     CheckResult,

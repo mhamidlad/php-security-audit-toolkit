@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 
-import os
-import tempfile
-
 from php_audit.config import ScanConfig
 from php_audit.discovery import FileDiscovery
 

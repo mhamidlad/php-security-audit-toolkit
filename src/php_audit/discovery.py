@@ -7,7 +7,6 @@ from pathlib import Path
 
 from .config import ScanConfig
 
-
 # File extensions that the scanner reads
 PHP_EXTENSIONS = {".php", ".phtml", ".php5", ".phps"}
 CONFIG_EXTENSIONS = {".env", ".ini", ".yml", ".yaml", ".toml", ".conf", ".xml"}

@@ -139,7 +139,7 @@ def audit_dependencies(
                                         file=rel,
                                         line=0,
                                         description=f"Composer script '{key}' contains a potentially risky command.",
-                                        evidence=f"[REDACTED]",
+                                        evidence="[REDACTED]",
                                         impact="Composer scripts execute automatically during install/update and could run arbitrary commands.",
                                         remediation="Review composer scripts carefully. Avoid executing external commands in post-install/post-update scripts.",
                                         references=[
@@ -161,6 +161,14 @@ def audit_dependencies(
             cve = adv.get("cve", "")
             affected = adv.get("affectedVersions", "")
 
+            desc = f"{title}. Affected versions: {affected}."
+            if cve:
+                desc += f" CVE: {cve}."
+            refs = [link] if link else []
+            refs.append(f"https://packagist.org/packages/{pkg_name}")
+            if adv_id:
+                refs.append(f"Advisory: {adv_id}")
+
             findings.append(
                 Finding(
                     rule_id="DEP001",
@@ -170,16 +178,11 @@ def audit_dependencies(
                     category="Dependencies",
                     file="composer.lock",
                     line=0,
-                    description=f"{title}. Affected versions: {affected}.",
+                    description=desc,
                     evidence=f"Package: {pkg_name}, Versions: {affected}",
                     impact="The installed version of this package has a known security vulnerability.",
                     remediation="Update the package to a patched version. Run 'composer update <package>' or check the advisory for fix details.",
-                    references=[
-                        link,
-                        f"https://packagist.org/packages/{pkg_name}",
-                    ]
-                    if link
-                    else [f"https://packagist.org/packages/{pkg_name}"],
+                    references=refs,
                     detection_method="composer-audit",
                     manual_verification_required=False,
                 )

@@ -4,11 +4,8 @@ from __future__ import annotations
 
 from rich.console import Console
 from rich.table import Table
-from rich.panel import Panel
-from rich.text import Text
 
 from ..models import ScanResult, Severity
-
 
 SEVERITY_COLORS = {
     Severity.CRITICAL: "red bold",
@@ -25,7 +22,6 @@ def render_terminal(result: ScanResult, console: Console | None = None) -> str:
     Returns the rendered string. If a console is provided, also prints.
     """
     console = console or Console(record=True)
-    lines: list[str] = []
 
     # Header
     console.print()

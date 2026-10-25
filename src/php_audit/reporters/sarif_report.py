@@ -6,7 +6,6 @@ import json
 
 from ..models import ScanResult, Severity
 
-
 SEVERITY_TO_SARIF_LEVEL = {
     Severity.CRITICAL: "error",
     Severity.HIGH: "error",

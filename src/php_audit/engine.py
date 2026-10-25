@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from .composer_audit import audit_dependencies
 from .config import ScanConfig
@@ -29,7 +29,7 @@ def run_scan(project_path: str, config: ScanConfig) -> ScanResult:
     """
     result = ScanResult(
         project_path=project_path,
-        scan_time=datetime.now(timezone.utc).isoformat(),
+        scan_time=datetime.now(UTC).isoformat(),
     )
 
     # Discover files
@@ -51,7 +51,6 @@ def run_scan(project_path: str, config: ScanConfig) -> ScanResult:
             check_result = audit_secrets(project_path, file_groups.get("all", []))
             result.checks.append(check_result)
         elif check == "composer":
-            php_path = config.tools.get("php_path")
             check_result = audit_dependencies(
                 project_path,
                 file_groups.get("composer", []),
@@ -98,7 +97,7 @@ def run_scan(project_path: str, config: ScanConfig) -> ScanResult:
 
 def _run_php_check(php_files: list[str], project_path: str):
     """Run PHP static analysis rules on PHP files."""
-    from .models import CheckResult, CheckStatus
+    from .models import CheckResult
 
     check_result = CheckResult(
         name="php",

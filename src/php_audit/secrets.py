@@ -7,7 +7,6 @@ import re
 
 from .models import CheckResult, CheckStatus, Confidence, Finding, Severity
 
-
 # Secret detection patterns
 SECRET_PATTERNS: list[dict] = [
     {

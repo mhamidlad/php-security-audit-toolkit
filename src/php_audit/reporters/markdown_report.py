@@ -13,14 +13,14 @@ def render_markdown(result: ScanResult) -> str:
     lines.append("")
     lines.append(f"**Project:** `{result.project_path}`")
     lines.append(f"**Scan time:** {result.scan_time}")
-    lines.append(f"**Tool:** php-security-audit-toolkit v0.1.0")
+    lines.append("**Tool:** php-security-audit-toolkit v0.1.0")
     lines.append("")
 
     # Summary
     lines.append("## Summary")
     lines.append("")
-    lines.append(f"| Metric | Value |")
-    lines.append(f"|--------|-------|")
+    lines.append("| Metric | Value |")
+    lines.append("|--------|-------|")
     lines.append(f"| Files scanned | {result.files_scanned} |")
     lines.append(f"| Checks completed | {result.checks_completed} |")
     lines.append(f"| Checks skipped | {result.checks_skipped} |")

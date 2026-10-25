@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 
-class Severity(str, enum.Enum):
+class Severity(enum.StrEnum):
     """Severity levels for security findings."""
 
     CRITICAL = "CRITICAL"
@@ -28,7 +28,7 @@ class Severity(str, enum.Enum):
         return order.index(finding_severity) >= order.index(threshold)
 
 
-class Confidence(str, enum.Enum):
+class Confidence(enum.StrEnum):
     """Confidence levels for findings."""
 
     HIGH = "HIGH"
@@ -36,7 +36,7 @@ class Confidence(str, enum.Enum):
     LOW = "LOW"
 
 
-class CheckStatus(str, enum.Enum):
+class CheckStatus(enum.StrEnum):
     """Status of a completed or skipped check."""
 
     COMPLETED = "COMPLETED"

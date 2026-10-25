@@ -2,11 +2,7 @@
 
 from __future__ import annotations
 
-import os
-import tempfile
-from pathlib import Path
-
-from php_audit.secrets import scan_file_for_secrets, audit_secrets
+from php_audit.secrets import audit_secrets, scan_file_for_secrets
 
 
 class TestSecretDetection:

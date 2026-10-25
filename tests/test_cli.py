@@ -3,9 +3,6 @@
 from __future__ import annotations
 
 import json
-import os
-import tempfile
-from pathlib import Path
 
 from typer.testing import CliRunner
 
@@ -39,7 +36,7 @@ class TestCli:
             "--format", "json",
             "--output", str(output_file),
         ])
-
+        assert result.exit_code == 1
         assert output_file.exists()
         data = json.loads(output_file.read_text())
         assert data["tool"] == "php-security-audit-toolkit"
@@ -60,7 +57,7 @@ class TestCli:
             "--format", "sarif",
             "--output", str(output_file),
         ])
-
+        assert result.exit_code == 1
         assert output_file.exists()
         data = json.loads(output_file.read_text())
         assert data["version"] == "2.1.0"
@@ -81,7 +78,7 @@ class TestCli:
             "--format", "markdown",
             "--output", str(output_file),
         ])
-
+        assert result.exit_code == 1
         assert output_file.exists()
         content = output_file.read_text()
         assert "PHP Security Audit Report" in content

@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import json
-import sys
 from pathlib import Path
 
 import typer
@@ -199,7 +197,7 @@ def config(
         if valid:
             console.print(f"[green]Configuration is valid: {path}[/green]")
         else:
-            console.print(f"[red]Configuration is invalid:[/red]")
+            console.print("[red]Configuration is invalid:[/red]")
             for err in errors:
                 console.print(f"  [red]- {err}[/red]")
             raise typer.Exit(code=2)

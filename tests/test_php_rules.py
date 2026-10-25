@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 from php_audit.php_rules import (
-    run_php_rules,
+    PHP_RULES,
     rule_php001_sql_injection,
     rule_php002_command_injection,
     rule_php003_xss,
@@ -18,9 +17,8 @@ from php_audit.php_rules import (
     rule_php009_weak_password_hashing,
     rule_php010_unsafe_redirect,
     rule_php012_debug_exposure,
-    PHP_RULES,
+    run_php_rules,
 )
-
 
 VULNERABLE_FILE = Path(__file__).parent.parent / "examples" / "vulnerable" / "vulnerable.php"
 SECURE_FILE = Path(__file__).parent.parent / "examples" / "secure" / "secure.php"
@@ -169,7 +167,9 @@ class TestFullFileScan:
 
     def test_findings_have_redacted_evidence(self):
         """Ensure potential secrets in evidence are redacted."""
-        lines = ['$api_key = "sk-1234567890abcdefghijklmnop";']
-        findings = run_php_rules("test.php")  # No findings from empty
-        # This test verifies the redaction function exists
-        # Actual secret redaction is tested in test_secrets.py
+        from php_audit.php_rules import _redact_evidence
+
+        evidence = '$api_key = "sk-1234567890abcdefghijklmnop";'
+        redacted = _redact_evidence(evidence)
+        assert "[REDACTED]" in redacted
+        assert "sk-1234" not in redacted
